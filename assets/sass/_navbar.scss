@@ -1,0 +1,197 @@
+@mixin desktop {
+    @media (max-width:1280px) {
+        @content
+    }
+}
+
+@mixin desktop-top {
+    @media (max-width:1023px) {
+        @content
+    }
+}
+
+@mixin desktop-below {
+    @media (max-width:1024px) {
+        @content
+    }
+}
+
+@mixin pad {
+    @media (max-width:767px) {
+        @content
+    }
+}
+
+@mixin iphone {
+    @media (max-width:568px) {
+        @content
+    }
+}
+
+@mixin mobile480 {
+    @media (max-width:480px) {
+        @content
+    }
+}
+
+@mixin iphone5 {
+    @media (max-width:320px) {
+        @content
+    }
+}
+
+body {
+    transition: all .3s;
+}
+
+
+nav {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 50px;
+
+    @include pad() {
+        padding: 30px 20px;
+    }
+}
+
+.navBox {
+    position: relative;
+
+    h1 {
+        position: absolute;
+        width: 275px;
+        height: 80px;
+        top: 0;
+        left: 0;
+
+        .logo {
+            @include pad() {
+                width: calc(275px / 2);
+            }
+        }
+    }
+
+    &.sideBox {
+        position: absolute;
+        right: 50px;
+
+        @include pad() {
+            top: 30px;
+            right: 20px;
+        }
+
+        &.d-flex {
+            flex-direction: column;
+
+            @include pad() {
+                height: calc(100% - 60px);
+                justify-content: space-between;
+                align-items: flex-end;
+            }
+        }
+
+        .copyright {
+            @include desktop-top() {
+                display: table;
+                writing-mode: vertical-lr;
+                text-orientation: mixed;
+            }
+        }
+    }
+
+    &.menu-wrap {
+        height: 100%;
+        text-align: center;
+        align-items: flex-end;
+        align-self: flex-end;
+        position: relative;
+
+        .nav-item {
+            width: 245px;
+            font-size: 1.5rem;
+
+            @include pad() {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 0px;
+                transition: all 0.8s;
+                overflow: hidden;
+                z-index: 120;
+                background-color: #fff;
+            }
+
+            &.active {
+                height: 100%;
+                padding: 50% 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            a {
+                padding: 15px 0;
+                margin: 15px 0;
+
+                &:hover {
+                    font-weight: 500;
+                }
+
+                &.act {
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .follow_wrap {
+            width: 100%;
+            flex-direction: column;
+
+            p {
+                text-align: left;
+            }
+        }
+
+        .follow_group {
+            font-size: 33px;
+
+            li {
+                &+li {
+                    margin-left: 15px;
+                }
+
+                i {
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}
+
+.button-toggle {
+    display: none;
+
+    @include pad() {
+        position: relative;
+        display: block;
+        width: 40px;
+        z-index: 10000;
+    }
+
+    span {
+        width: 100%;
+        height: 2px;
+        background-color: #000;
+        display: block;
+
+        &+span {
+            margin-top: calc((30px - 6px) / 2);
+        }
+    }
+}
